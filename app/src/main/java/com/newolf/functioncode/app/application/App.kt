@@ -33,5 +33,9 @@ open class App :Application() {
         Bugly.init(context, BuildConfig.BUGLY_APP_ID, BuildConfig.DEBUG)
         Beta.autoInit = true
         Beta.autoDownloadOnWifi = true
+
+
+        //自定义升级弹窗
+//        Beta.upgradeDialogLayoutId = R.layout.upgrade_dialog;
     }
 }

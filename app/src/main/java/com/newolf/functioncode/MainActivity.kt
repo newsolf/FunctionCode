@@ -2,6 +2,7 @@ package com.newolf.functioncode
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import com.blankj.utilcode.util.ToastUtils
 import com.newolf.functioncode.app.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -11,9 +12,11 @@ class MainActivity : BaseActivity() {
         when (item.itemId) {
             R.id.navigation_home -> {
                 message.setText(R.string.title_home)
+                ToastUtils.showShort(R.string.title_home)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
+                ToastUtils.showShort(BuildConfig.VERSION_NAME)
                 message.setText(R.string.title_dashboard)
                 return@OnNavigationItemSelectedListener true
             }
@@ -28,6 +31,8 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
