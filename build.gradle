@@ -8,7 +8,10 @@ buildscript {
                    minSdkVersion    : 19,
                    targetSdkVersion : 27,
                    versionCode      : 100,
-                   versionName      : '1.0.0'
+                   versionName      : '1.0.0',
+
+                   buglyIdDebug         : '309020d535', //debug
+                   buglyIdRelease       : 'e6f4d08596',
 
 
         ]

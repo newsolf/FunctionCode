@@ -1,8 +1,9 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+
+//apply from: 'tinker-support.gradle'
+
 
 android {
     compileSdkVersion configs.compileSdkVersion
@@ -20,11 +21,53 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    signingConfigs {
+
+        release {
+            v2SigningEnabled true
+            storeFile file("FCode.jks")
+            storePassword "adminFCode"
+            keyAlias "FCode"
+            keyPassword "adminFCode"
+
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+
+            //是否进行混淆
+            minifyEnabled true
+            //Zipalign优化
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+
+            buildConfigField 'String', 'BUGLY_APP_ID', "\"$configs.buglyIdDebug\""
+
+        }
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+
+            //混淆文件位置
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            buildConfigField 'String', 'BUGLY_APP_ID', "\"$configs.buglyIdRelease\""
+
+
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$configs.kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$configs.kotlin_version"
     implementation deps.appcompatV7
     implementation deps.design
     implementation deps.constraintLayout
@@ -32,4 +75,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+//external---------------------------------------------------------------------
+    api 'com.blankj:utilcode:1.9.8'
+    implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
 }
