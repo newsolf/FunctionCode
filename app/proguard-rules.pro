@@ -192,12 +192,28 @@
 -dontwarn com.blankj.utilcode.**
 -keep class com.blankj.utilcode.** {*;}
 
+#jpush
+
+-dontwarn cn.jpush.**
+-keep class cn.jpush.** { *; }
+-keep class * extends cn.jpush.android.helpers.JPushMessageReceiver { *; }
+-dontwarn cn.jiguang.**
+-keep class cn.jiguang.** { *; }
+
+
+
 # AndroidEventBus
 -keep class org.simple.** { *; }
 -keep interface org.simple.** { *; }
 -keepclassmembers class * {
     @org.simple.eventbus.Subscriber <methods>;
 }
+#==================gson && protobuf==========================
+-dontwarn com.google.**
+-keep class com.google.gson.** {*;}
+-keep class com.google.protobuf.** {*;}
+
+
 
 
 # 百度地图（jar包换成自己的版本，记得签名要匹配）

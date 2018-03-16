@@ -3,12 +3,13 @@
 buildscript {
     ext {
         configs = [kotlin_version   : '1.2.21',
+                   applicationId    : 'com.newolf.functioncode',
                    compileSdkVersion: 27,
                    buildToolsVersion: '25.0.0',
                    minSdkVersion    : 19,
                    targetSdkVersion : 23,
-                   versionCode      : 101,
-                   versionName      : '1.0.1',
+                   versionCode      : 103,
+                   versionName      : '1.0.3',
 
                    buglyIdDebug     : '309020d535', //debug
                    buglyIdRelease   : 'e6f4d08596',

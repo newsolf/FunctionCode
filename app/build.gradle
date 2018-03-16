@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-apply from: 'tinker-support.gradle'
+//apply from: 'tinker-support.gradle'
 
 
 android {
     compileSdkVersion configs.compileSdkVersion
     defaultConfig {
-        applicationId "com.newolf.functioncode"
+        applicationId configs.applicationId
         minSdkVersion configs.minSdkVersion
         targetSdkVersion configs.targetSdkVersion
         versionCode configs.versionCode
@@ -19,6 +19,12 @@ android {
             // 设置支持的SO库架构
             abiFilters 'armeabi'//,'arm64-v8a',  'armeabi-v7a', 'x86','x86_64', 'mips', 'mips64'
         }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : configs.applicationId,
+                JPUSH_APPKEY : "6008e175e4c65d30e164d871", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
     }
     buildTypes {
         release {
@@ -74,7 +80,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 //external---------------------------------------------------------------------
-    api 'com.blankj:utilcode:1.9.8'
+    api 'com.blankj:utilcode:1.13.4'
     implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
     implementation 'com.tencent.bugly:nativecrashreport:latest.release'
+
+    implementation 'cn.jiguang.sdk:jpush:3.1.1'
+    implementation 'cn.jiguang.sdk:jcore:1.1.9'
 }

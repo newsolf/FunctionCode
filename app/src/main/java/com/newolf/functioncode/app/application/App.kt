@@ -1,6 +1,7 @@
 package com.newolf.functioncode.app.application
 
 import android.app.Application
+import cn.jpush.android.api.JPushInterface
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.Utils
 import com.newolf.functioncode.BuildConfig
@@ -21,7 +22,10 @@ open class App :Application() {
         super.onCreate()
         initUtils(this)
         initBugly(this)
+        initPush(this)
     }
+
+
 
     private fun initUtils(app: App) {
         Utils.init(this)
@@ -37,5 +41,10 @@ open class App :Application() {
 
         //自定义升级弹窗
 //        Beta.upgradeDialogLayoutId = R.layout.upgrade_dialog;
+    }
+
+    private fun initPush(app: App) {
+        JPushInterface.setDebugMode(BuildConfig.DEBUG)
+        JPushInterface.init(this)
     }
 }
