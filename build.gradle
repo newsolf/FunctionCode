@@ -1,11 +1,13 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext.kotlin_version = '1.2.31'
+    ext.kotlin_version = '1.0.0'
     ext {
         configs = [kotlin_version   : '1.2.21',
                    applicationId    : 'com.newolf.functioncode',
                    compileSdkVersion: 27,
-                   buildToolsVersion: '25.0.0',
+//                   buildToolsVersion: '25.0.0',
                    minSdkVersion    : 19,
                    targetSdkVersion : 23,
                    versionCode      : 103,
@@ -32,13 +34,14 @@ buildscript {
 
     }
     repositories {
-        google()
         jcenter()
+        google()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.0-alpha04'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$configs.kotlin_version"
         classpath "com.tencent.bugly:tinker-support:latest.release"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

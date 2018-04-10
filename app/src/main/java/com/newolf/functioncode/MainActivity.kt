@@ -1,74 +1,67 @@
 package com.newolf.functioncode
 
 import android.support.design.widget.BottomNavigationView
-import android.support.design.widget.NavigationView
 import android.support.v4.content.ContextCompat
 import com.blankj.utilcode.constant.PermissionConstants
 import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.ToastUtils
-import com.newolf.functioncode.app.Navigate
 import com.newolf.functioncode.app.base.BaseActivity
-import com.newolf.functioncode.app.configs.Constants
-import com.newolf.functioncode.app.helper.DialogHelper
+import com.newolf.functioncode.app.utils.helper.DialogHelper
+import com.newolf.functioncode.home.HomeFragment
+import com.newolf.functioncode.home.OtherFragment
+import com.newolf.functioncode.home.SecondFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : BaseActivity() {
-    var lastClick : Long = 0
+    var lastClick: Long = 0
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                message.setText(R.string.title_home)
-                ToastUtils.showShort(R.string.title_home)
+                switchHome()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                ToastUtils.showShort(BuildConfig.VERSION_NAME)
-                message.setText(R.string.title_dashboard)
+                LogUtils.e("SecondFragment"+flContent.measuredHeight)
+                fragmentManager.beginTransaction().replace(R.id.flContent, SecondFragment()).commit()
+                LogUtils.e("SecondFragment"+flContent.measuredHeight)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                message.setText(R.string.title_notifications)
-                return@OnNavigationItemSelectedListener true
-            }
-        }
-        false
-    }
-
-    val mListener = NavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.actionGitHub -> {
-                Navigate.startInnerH5(mContext, Constants.GIT_HUB)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.actionBlog -> {
-                Navigate.startInnerH5(mContext, Constants.BLOG)
+                LogUtils.e("OtherFragment"+flContent.measuredHeight)
+                fragmentManager.beginTransaction().replace(R.id.flContent, OtherFragment()).commit()
+                LogUtils.e("OtherFragment"+flContent.measuredHeight)
                 return@OnNavigationItemSelectedListener true
             }
 
         }
         false
     }
-
 
 
     override fun bindLayout(): Int {
         return R.layout.activity_main
-//        return R.layout.activity_test
     }
 
     override fun initView() {
-        BarUtils.setStatusBarAlpha(this,0,true)
+        BarUtils.setStatusBarAlpha(this, 0, true)
         request()
-    }
 
+
+    }
 
 
     override fun initListener() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        navigationView.setNavigationItemSelectedListener(mListener)
+        switchHome()
+    }
+
+    private fun switchHome() {
+        LogUtils.e("switchHome"+flContent.measuredHeight)
+
+        fragmentManager.beginTransaction().replace(R.id.flContent, HomeFragment()).commit()
     }
 
 
@@ -92,13 +85,15 @@ class MainActivity : BaseActivity() {
             .request()
 
     override fun onBackPressed() {
-        if (System.currentTimeMillis() - lastClick<2000){
+        if (System.currentTimeMillis() - lastClick < 2000) {
             super.onBackPressed()
-        }else{
-            ToastUtils.setBgColor(ContextCompat.getColor(mContext,R.color.colorAccent))
+        } else {
+            ToastUtils.setBgColor(ContextCompat.getColor(mContext, R.color.colorAccent))
             ToastUtils.showShort(R.string.exit_app)
         }
-         lastClick = System.currentTimeMillis();
+        lastClick = System.currentTimeMillis();
 
     }
+
+
 }

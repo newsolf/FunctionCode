@@ -5,8 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v7.app.AppCompatActivity
-import android.view.LayoutInflater
 import android.view.View
+import com.blankj.utilcode.util.BarUtils
 
 /**
  * ================================================
@@ -20,9 +20,7 @@ import android.view.View
 abstract class BaseActivity : AppCompatActivity(), IBaseView {
     lateinit var mContext: Context
 
-    protected open fun creatContentView(@LayoutRes layoutId: Int): View {
-        return LayoutInflater.from(this).inflate(layoutId, null)
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,12 +31,14 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
         loadData()
         initListener()
     }
+
     protected open fun setBaseView(@LayoutRes layoutId: Int) {
         setContentView(layoutId)
+
     }
 
     override fun getExtras() {
-        getExtras(intent!!)
+        getExtras(intent)
     }
 
     protected fun getExtras(intent: Intent) {
@@ -47,6 +47,24 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
     override fun loadData() {
 
     }
+
+    override fun onStart() {
+        super.onStart()
+        BarUtils.setNavBarImmersive(this)
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        BarUtils.setNavBarImmersive(this)
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+    }
+
+
 
 }
 

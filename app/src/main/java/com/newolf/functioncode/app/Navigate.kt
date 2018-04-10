@@ -15,15 +15,13 @@ import com.blankj.utilcode.util.LogUtils
  * 历史:<br/>
  * ================================================
  */
-open class Navigate {
-    companion object {
-        private fun startActivity(context: Context, clz: Class<*>) {
-            context.startActivity(Intent(context, clz))
-        }
+object Navigate {
+    private fun startActivity(context: Context, clz: Class<*>) {
+        context.startActivity(Intent(context, clz))
+    }
 
-        fun startInnerH5(content: Context, url: String) {
-            LogUtils.e(url)
-            content.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-        }
+    fun startInnerH5(content: Context, url: String) {
+        LogUtils.e(url)
+        content.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
     }
 }

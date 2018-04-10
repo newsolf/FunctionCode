@@ -48,19 +48,21 @@ android {
 
     buildTypes {
         debug {
+            boolean enable = false
             signingConfig signingConfigs.release
-            minifyEnabled true
-            shrinkResources true
-            zipAlignEnabled true
+            minifyEnabled enable
+            shrinkResources enable
+            zipAlignEnabled enable
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'BUGLY_APP_ID', "\"$configs.buglyIdDebug\""
 
         }
         release {
+            boolean enable = true
             signingConfig signingConfigs.release
-            minifyEnabled true
-            shrinkResources true
-            zipAlignEnabled true
+            minifyEnabled enable
+            shrinkResources enable
+            zipAlignEnabled enable
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'BUGLY_APP_ID', "\"$configs.buglyIdRelease\""
 
@@ -70,7 +72,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$configs.kotlin_version"
     implementation deps.appcompatV7
     implementation deps.design
@@ -79,13 +81,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-//external---------------------------------------------------------------------
+    //external---------------------------------------------------------------------
     api 'com.blankj:utilcode:1.13.4'
     implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
     implementation 'com.tencent.bugly:nativecrashreport:latest.release'
-
     implementation 'cn.jiguang.sdk:jpush:3.1.1'
     implementation 'cn.jiguang.sdk:jcore:1.1.9'
-
     implementation 'com.r0adkll:slidableactivity:2.0.5'
+    implementation project(':library:compatinset')
 }

@@ -3,8 +3,6 @@ package com.newolf.functioncode.app.base
 
 import android.support.annotation.LayoutRes
 import android.support.design.widget.NavigationView
-import android.support.v7.app.ActionBarDrawerToggle
-import com.blankj.utilcode.util.BarUtils
 import com.newolf.functioncode.R
 import com.newolf.functioncode.app.Navigate
 import com.newolf.functioncode.app.configs.Constants
@@ -41,27 +39,29 @@ abstract class BaseDrawerActivity : BaseActivity() {
         setContentView(R.layout.activity_drawer)
         val view = layoutInflater.inflate(layoutId, null)
         activityContainer.addView(view)
-
+        navigationView.setNavigationItemSelectedListener(mListener)
+//        BarUtils.setNavBarImmersive(this)
+//        BarUtils.addMarginTopEqualStatusBarHeight(view)
         setBar()
     }
 
-    override fun initView() {
-        setSupportActionBar(toolBar)
-    }
+
+
+
     override fun initListener() {
-        navigationView.setNavigationItemSelectedListener(mListener)
-        val toggle = ActionBarDrawerToggle(this,
-                rootLayout,
-                toolBar,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close)
-        rootLayout.addDrawerListener(toggle)
-        toggle.syncState()
+
+//        val toggle = ActionBarDrawerToggle(this,
+//                rootLayout,
+//                toolBar,
+//                R.string.navigation_drawer_open,
+//                R.string.navigation_drawer_close)
+//        rootLayout.addDrawerListener(toggle)
+//        toggle.syncState()
     }
 
     private fun setBar() {
-        BarUtils.setStatusBarAlpha(this,0,true)
-
+//        BarUtils.setStatusBarColor4Drawer(this,rootLayout,fakeStatusBar,Color.WHITE,0,false)
+//        rootLayout.fitsSystemWindows =true
     }
 
 
