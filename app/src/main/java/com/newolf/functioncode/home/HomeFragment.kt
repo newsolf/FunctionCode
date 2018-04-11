@@ -1,5 +1,6 @@
 package com.newolf.functioncode.home
 
+import com.blankj.utilcode.util.BarUtils
 import com.newolf.functioncode.R
 import com.newolf.functioncode.app.base.BaseFragment
 
@@ -23,7 +24,12 @@ class HomeFragment : BaseFragment() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        BarUtils.setStatusBarLightMode(activity, false)
+    }
     override fun onResume() {
         super.onResume()
+
     }
 }

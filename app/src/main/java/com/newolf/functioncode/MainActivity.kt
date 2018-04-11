@@ -3,7 +3,6 @@ package com.newolf.functioncode
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.content.ContextCompat
 import com.blankj.utilcode.constant.PermissionConstants
-import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.ToastUtils
@@ -46,7 +45,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initView() {
-        BarUtils.setStatusBarAlpha(this, 0, true)
+//        BarUtils.setStatusBarAlpha(this, 0, true)
         request()
 
 

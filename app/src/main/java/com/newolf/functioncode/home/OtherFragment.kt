@@ -1,5 +1,6 @@
 package com.newolf.functioncode.home
 
+import com.blankj.utilcode.util.BarUtils
 import com.newolf.functioncode.app.base.BaseFragment
 
 /**
@@ -12,4 +13,8 @@ import com.newolf.functioncode.app.base.BaseFragment
  * ================================================
  */
 class OtherFragment : BaseFragment() {
+    override fun onStart() {
+        super.onStart()
+        BarUtils.setStatusBarLightMode(activity, true)
+    }
 }

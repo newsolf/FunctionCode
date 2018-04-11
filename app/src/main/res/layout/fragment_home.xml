@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-            android:text="@string/title_home"
+            android:text="@string/app_introduce"
             android:textSize="@dimen/textSize_50"/>
     </com.newolf.compatinset.InsetLinearLayout>
 

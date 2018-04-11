@@ -10,4 +10,5 @@
     <string name="blog">Blog</string>
     <string name="navigation_drawer_open">Navigation drawer open</string>
     <string name="navigation_drawer_close">Navigation drawer close</string>
+    <string name="app_introduce">项目介绍</string>
 </resources>
