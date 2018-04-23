@@ -66,5 +66,6 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
 
 
 
+
 }
 

@@ -1,43 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
+
+
+<com.newolf.compatinset.InsetLinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   >
+    android:fitsSystemWindows="@bool/fits_system_windows"
+    android:orientation="vertical">
 
-    <com.newolf.compatinset.InsetLinearLayout
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/colorAccent"
+        android:scaleType="fitXY"/>
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:fitsSystemWindows="@bool/fits_system_windows">
+
+        android:text="@string/app_introduce"
+        android:textSize="@dimen/textSize_50"/>
+</com.newolf.compatinset.InsetLinearLayout>
 
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="fitXY"
-            android:background="@color/colorAccent"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            android:text="@string/app_introduce"
-            android:textSize="@dimen/textSize_50"/>
-    </com.newolf.compatinset.InsetLinearLayout>
-
-
-    <com.newolf.compatinset.InsetNavigationView
-        android:id="@+id/navigationView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/FFFFFF"
-        android:fitsSystemWindows="true"
-        android:paddingTop="25dp"
-        app:headerLayout="@layout/nav_header"
-        app:menu="@menu/main_drawer"/>
-
-</android.support.v4.widget.DrawerLayout>

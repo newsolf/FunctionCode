@@ -9,4 +9,6 @@
     <string name="navigation_drawer_open">导航抽屉打开</string>
     <string name="navigation_drawer_close">导航抽屉关闭</string>
     <string name="app_introduce">项目介绍</string>
+    <string name="activity_splash">引导页</string>
+    <string name="jump">跳过 %1$ds</string>
 </resources>

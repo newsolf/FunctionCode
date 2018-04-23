@@ -18,18 +18,15 @@ class HomeFragment : BaseFragment() {
         return R.layout.fragment_home
     }
 
-    override fun initView() {
-//        BarUtils.setStatusBarColor4Drawer(activity,drawerLayout,fakeStatusBar,0,true)
-//        BarUtils.setStatusBarAlpha(activity, 0, true)
 
-    }
+
+
+
+
 
     override fun onStart() {
         super.onStart()
         BarUtils.setStatusBarLightMode(activity, false)
     }
-    override fun onResume() {
-        super.onResume()
 
-    }
 }

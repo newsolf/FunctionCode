@@ -6,7 +6,7 @@ import com.blankj.utilcode.constant.PermissionConstants
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.ToastUtils
-import com.newolf.functioncode.app.base.BaseActivity
+import com.newolf.functioncode.app.base.BaseDrawerActivity
 import com.newolf.functioncode.app.utils.helper.DialogHelper
 import com.newolf.functioncode.home.HomeFragment
 import com.newolf.functioncode.home.OtherFragment
@@ -14,7 +14,7 @@ import com.newolf.functioncode.home.SecondFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseDrawerActivity() {
     var lastClick: Long = 0
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -23,15 +23,11 @@ class MainActivity : BaseActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                LogUtils.e("SecondFragment"+flContent.measuredHeight)
                 fragmentManager.beginTransaction().replace(R.id.flContent, SecondFragment()).commit()
-                LogUtils.e("SecondFragment"+flContent.measuredHeight)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                LogUtils.e("OtherFragment"+flContent.measuredHeight)
                 fragmentManager.beginTransaction().replace(R.id.flContent, OtherFragment()).commit()
-                LogUtils.e("OtherFragment"+flContent.measuredHeight)
                 return@OnNavigationItemSelectedListener true
             }
 
@@ -45,10 +41,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initView() {
-//        BarUtils.setStatusBarAlpha(this, 0, true)
         request()
-
-
     }
 
 

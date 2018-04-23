@@ -45,7 +45,7 @@ abstract class BaseFragment : Fragment(), IBaseView {
     }
 
     override fun initView() {
-        tvShow.setText(javaClass.simpleName)
+        tvShow?.setText(javaClass.simpleName)
     }
 
     override fun loadData() {

@@ -18,12 +18,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--支持全面屏-->
-        <meta-data android:name="android.max_aspect" android:value="2.1" />
-        <activity
 
-            android:name=".MainActivity"
+        <!-- 支持全面屏 -->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1"/>
+
+        <activity
+            android:name=".activity.SplashActivity"
             android:label="@string/app_name">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -31,12 +35,14 @@
             </intent-filter>
         </activity>
 
-        <!--Bugly Start-->
+        <activity android:name=".MainActivity"/>
+
+
+        <!-- Bugly Start -->
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
             android:theme="@android:style/Theme.Translucent"/>
-
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -48,9 +54,10 @@
                 android:resource="@xml/provider_paths"/>
         </provider>
 
-        <!--Bugly End-->
+        <!-- Bugly End -->
 
-        <!--jpush Start-->
+
+        <!-- jpush Start -->
         <service
             android:name="cn.jpush.android.service.PushService"
             android:exported="false"
@@ -77,7 +84,8 @@
                 <category android:name="com.newolf.pushtest"/>
             </intent-filter>
         </receiver>
-        <!--jpush End-->
+        <!-- jpush End -->
+
 
     </application>
 

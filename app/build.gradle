@@ -21,9 +21,9 @@ android {
         }
 
         manifestPlaceholders = [
-                JPUSH_PKGNAME : configs.applicationId,
+                JPUSH_PKGNAME: configs.applicationId,
                 JPUSH_APPKEY : "6008e175e4c65d30e164d871", //JPush上注册的包名对应的appkey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }
     buildTypes {
@@ -78,6 +78,7 @@ dependencies {
     implementation deps.design
     implementation deps.constraintLayout
     implementation deps.vectorDrawable
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
