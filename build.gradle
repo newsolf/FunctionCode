@@ -2,9 +2,9 @@
 
 buildscript {
     ext.kotlin_version = '1.2.31'
-    ext.kotlin_version = '1.0.0'
+//    ext.kotlin_version = '1.0.0'
     ext {
-        configs = [kotlin_version   : '1.2.21',
+        configs = [kotlin_version   : kotlin_version,
                    applicationId    : 'com.newolf.functioncode',
                    compileSdkVersion: 27,
 //                   buildToolsVersion: '25.0.0',
@@ -19,7 +19,7 @@ buildscript {
 
         ]
 
-        def supportLibraryVersion = '27.0.2'
+        def supportLibraryVersion = '27.1.0'
         def constraintLayoutVersion = '1.0.2'
         deps = [supportCompat   : "com.android.support:support-compat:$supportLibraryVersion",
                 supportCoreUi   : "com.android.support:support-core-ui:$supportLibraryVersion",
@@ -29,6 +29,7 @@ buildscript {
                 gridlayoutV7    : "com.android.support:gridlayout-v7:$supportLibraryVersion",
                 supportV4       : "com.android.support:support-v4:$supportLibraryVersion",
                 vectorDrawable  : "com.android.support:support-vector-drawable:$supportLibraryVersion",
+                recyclerviewV7  : "com.android.support:recyclerview-v7:$supportLibraryVersion",
                 constraintLayout: "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
         ]
 
@@ -40,7 +41,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.0-alpha04'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$configs.kotlin_version"
-        classpath "com.tencent.bugly:tinker-support:latest.release"
+        classpath "com.tencent.bugly:tinker-support:1.1.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -52,6 +53,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 
