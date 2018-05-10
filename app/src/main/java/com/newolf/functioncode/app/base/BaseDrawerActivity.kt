@@ -40,9 +40,7 @@ abstract class BaseDrawerActivity : BaseActivity() {
         val view = layoutInflater.inflate(layoutId, null)
         activityContainer.addView(view)
         navigationView.setNavigationItemSelectedListener(mListener)
-//        BarUtils.setNavBarImmersive(this)
-//        BarUtils.addMarginTopEqualStatusBarHeight(view)
-        setBar()
+
     }
 
 
@@ -59,10 +57,7 @@ abstract class BaseDrawerActivity : BaseActivity() {
 //        toggle.syncState()
     }
 
-    private fun setBar() {
-//        BarUtils.setStatusBarColor4Drawer(this,rootLayout,fakeStatusBar,Color.WHITE,0,false)
-//        rootLayout.fitsSystemWindows =true
-    }
+
 
 
 }

@@ -1,8 +1,10 @@
 package com.newolf.functioncode
 
-import android.support.design.widget.BottomNavigationView
+import android.support.design.widget.BottomNavigationView.OnNavigationItemSelectedListener
+import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import com.blankj.utilcode.constant.PermissionConstants
+import com.blankj.utilcode.util.FragmentUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.ToastUtils
@@ -16,18 +18,23 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseDrawerActivity() {
     var lastClick: Long = 0
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+    var curIndex: Int = 0
+    internal var mFragments = mutableListOf<Fragment>()
+    private val mOnNavigationItemSelectedListener = OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
+                LogUtils.e("navigation_home")
                 switchHome()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                fragmentManager.beginTransaction().replace(R.id.flContent, SecondFragment()).commit()
+                LogUtils.e("navigation_dashboard")
+                showCurrentFragment(1)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                fragmentManager.beginTransaction().replace(R.id.flContent, OtherFragment()).commit()
+                LogUtils.e("navigation_notifications")
+                showCurrentFragment(2)
                 return@OnNavigationItemSelectedListener true
             }
 
@@ -42,18 +49,26 @@ class MainActivity : BaseDrawerActivity() {
 
     override fun initView() {
         request()
+
+        mFragments.add(HomeFragment())
+        mFragments.add(SecondFragment())
+        mFragments.add(OtherFragment())
+
+        FragmentUtils.add(supportFragmentManager, mFragments, R.id.flContent, curIndex)
     }
 
 
     override fun initListener() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        switchHome()
+//        switchHome()
     }
 
     private fun switchHome() {
-        LogUtils.e("switchHome"+flContent.measuredHeight)
+        LogUtils.e("switchHome" + flContent.measuredHeight)
 
-        fragmentManager.beginTransaction().replace(R.id.flContent, HomeFragment()).commit()
+//        fragmentManager.beginTransaction().replace(R.id.flContent, HomeFragment()).commit()
+//        FragmentUtils.add(supportFragmentManager, HomeFragment(),R.id.flContent)
+        showCurrentFragment(0)
     }
 
 
@@ -85,6 +100,11 @@ class MainActivity : BaseDrawerActivity() {
         }
         lastClick = System.currentTimeMillis();
 
+    }
+
+    fun showCurrentFragment(index: Int) {
+        curIndex = index
+        FragmentUtils.showHide(index, mFragments)
     }
 
 

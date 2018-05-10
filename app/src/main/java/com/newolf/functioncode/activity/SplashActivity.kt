@@ -27,7 +27,7 @@ class SplashActivity : BaseActivity() {
 
             override fun onTick(millisUntilFinished: Long) {
                 val l = millisUntilFinished / countDownInterval
-                tvJump.setText(getString(R.string.jump, l))
+                tvJump?.setText(getString(R.string.jump, l))
                 if (l == 1.toLong()) {
                     nextToHome()
                 }
@@ -39,7 +39,7 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun initListener() {
-        tvJump.setOnClickListener({
+        tvJump?.setOnClickListener({
             nextToHome()
         })
     }

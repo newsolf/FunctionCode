@@ -1,5 +1,6 @@
 package com.newolf.rereshlayout;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import android.widget.ScrollView;
 
 import com.newolf.rereshlayout.adapter.BaseFooterAdapter;
 import com.newolf.rereshlayout.adapter.BaseHeaderAdapter;
+import com.newolf.rereshlayout.adapter.DefaultFooterAdapter;
 import com.newolf.rereshlayout.adapter.DefaultHeaderAdapter;
 import com.newolf.rereshlayout.interfaces.OnFooterLoadMoreListener;
 import com.newolf.rereshlayout.interfaces.OnHeaderRefreshListener;
@@ -29,12 +31,13 @@ import com.newolf.rereshlayout.utils.MeasureTools;
  * @author : NeWolf
  * @version : 1.0
  * @date :  2018/5/8
- * 描述:
+ * 描述: 一个支持ListView , RecycleView ,ScrollView  的下拉刷新和加载更多 以及 WebView 下拉刷新的容器
  * 历史:<br/>
  * ================================================
  */
 public class RefreshLayout extends LinearLayout {
     public static final float SCALE_SLOP = 0.3f;
+    private int animDuration = 500;//头、尾 部回弹动画执行时间
     public String TAG = getClass().getSimpleName();
     private Context mContext;
     private int mLastY;
@@ -89,7 +92,9 @@ public class RefreshLayout extends LinearLayout {
 
 
     public void setBaseHeaderAdapter() {
-        mBaseHeaderAdapter = new DefaultHeaderAdapter(mContext);
+        if (mBaseHeaderAdapter == null) {
+            mBaseHeaderAdapter = new DefaultHeaderAdapter(mContext);
+        }
         initHeaderView();
         initSubViewType();
     }
@@ -100,13 +105,12 @@ public class RefreshLayout extends LinearLayout {
         initSubViewType();
     }
 
-    private void initHeaderView() {
-        mHeaderView = mBaseHeaderAdapter.getHeaderView();
-        MeasureTools.measureView(mHeaderView);
-        mHeaderViewMeasuredHeight = mHeaderView.getMeasuredHeight();
-        LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mHeaderViewMeasuredHeight);
-        layoutParams.topMargin = -mHeaderViewMeasuredHeight;
-        mHeaderView.setLayoutParams(layoutParams);
+    public void setBaseFooterAdapter() {
+        if (mBaseFooterAdapter == null) {
+            mBaseFooterAdapter = new DefaultFooterAdapter(mContext);
+        }
+
+        initFooterView();
     }
 
     public void setBaseFooterAdapter(BaseFooterAdapter baseFooterAdapter) {
@@ -114,11 +118,43 @@ public class RefreshLayout extends LinearLayout {
         initFooterView();
     }
 
+    public void onHeaderRefreshComplete() {
+        if (mBaseHeaderAdapter == null) {
+            return;
+        }
+        reSetHeaderTopMargin(-mHeaderViewMeasuredHeight);
+        mBaseHeaderAdapter.headerRefreshComplete();
+        mHeaderState = PULL_TO_REFRESH;
+    }
+
+    public void onLoadMoreComplete() {
+        if (mBaseFooterAdapter == null) {
+            return;
+        }
+        reSetHeaderTopMargin(-mHeaderViewMeasuredHeight);
+        mBaseFooterAdapter.loadMoreComplete();
+        mFooterState = PULL_TO_REFRESH;
+    }
+
+
+    private void initHeaderView() {
+        mHeaderView = mBaseHeaderAdapter.getHeaderView();
+        MeasureTools.measureView(mHeaderView);
+        mHeaderViewMeasuredHeight = mHeaderView.getMeasuredHeight();
+        LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mHeaderViewMeasuredHeight);
+        layoutParams.topMargin = -mHeaderViewMeasuredHeight;
+        mHeaderView.setLayoutParams(layoutParams);
+        removeView(mHeaderView);
+        addView(mHeaderView, 0, layoutParams);
+    }
+
+
     private void initFooterView() {
         mFooterView = mBaseFooterAdapter.getFooterView();
         MeasureTools.measureView(mFooterView);
         mFooterViewMeasuredHeight = mFooterView.getMeasuredHeight();
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mFooterViewMeasuredHeight);
+        removeView(mFooterView);
         addView(mFooterView, layoutParams);
     }
 
@@ -180,9 +216,7 @@ public class RefreshLayout extends LinearLayout {
                 View child = mAdapterView.getChildAt(0);
                 if (child == null) {
                     belongToParentView = false;
-                }
-
-                if (mAdapterView.getFirstVisiblePosition() == 0 && child.getTop() == 0) {
+                } else if (mAdapterView.getFirstVisiblePosition() == 0 && child.getTop() == 0) {
                     mPullState = PULL_DOWN_STATE;
                     belongToParentView = true;
                 }
@@ -192,9 +226,9 @@ public class RefreshLayout extends LinearLayout {
                 View lastView = mAdapterView.getChildAt(lastPosition);
                 if (lastView == null) {
                     belongToParentView = false;
-                }
-
-                if (lastView.getBottom() <= getHeight() && mAdapterView.getLastVisiblePosition() == lastPosition) {
+                } else if (lastView.getBottom() <= getHeight() && mAdapterView.getLastVisiblePosition() == lastPosition) {
+                    // 最后一个子view的Bottom小于父View的高度说明mAdapterView的数据没有填满父view,
+                    // 等于父View的高度说明mAdapterView已经滑动到最后
                     mPullState = PULL_UP_STATE;
                     belongToParentView = true;
                 }
@@ -269,7 +303,7 @@ public class RefreshLayout extends LinearLayout {
                 int distY = y - mLastY;
                 Log.e(TAG, "onTouchEvent: distY==" + distY);
                 if (mPullState == PULL_DOWN_STATE) {
-                    Log.e(TAG, "onTouchEvent: pull down begin-->" + distY);
+                    Log.e(TAG, "onTouchEvent: pull down begin--> " + distY);
                     initHeaderViewToRefresh(distY);
                 } else if (mPullState == PULL_UP_STATE) {
                     initFooterViewToLoadMore(distY);
@@ -304,6 +338,9 @@ public class RefreshLayout extends LinearLayout {
     }
 
     private void footerLoadingMore() {
+        if (mBaseFooterAdapter == null) {
+            return;
+        }
         mFooterState = REFRESHING;
         int top = mHeaderViewMeasuredHeight + mFooterViewMeasuredHeight;
         setHeaderTopMargin(-top);
@@ -327,10 +364,33 @@ public class RefreshLayout extends LinearLayout {
             mBaseFooterAdapter.loadMoreComplete();
         }
 
+//        LayoutParams params = (LayoutParams) mHeaderView.getLayoutParams();
+//        params.topMargin = topMargin;
+//        mHeaderView.setLayoutParams(params);
+//        invalidate();
+
+        smoothMargin(topMargin);
+    }
+
+
+    /**
+     * 平滑设置header view 的margin
+     *
+     * @param topMargin
+     */
+    private void smoothMargin(int topMargin) {
         LayoutParams params = (LayoutParams) mHeaderView.getLayoutParams();
-        params.topMargin = topMargin;
-        mHeaderView.setLayoutParams(params);
-        invalidate();
+        ValueAnimator animator = ValueAnimator.ofInt(params.topMargin, topMargin);
+        animator.setDuration(animDuration);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mHeaderViewMeasuredHeight);
+                lp.topMargin = (int) animation.getAnimatedValue();
+                mHeaderView.setLayoutParams(lp);
+            }
+        });
+        animator.start();
     }
 
     private void headerRefreshing() {
@@ -367,7 +427,6 @@ public class RefreshLayout extends LinearLayout {
     }
 
     /**
-     *
      * @param distY
      */
     private void initFooterViewToLoadMore(int distY) {

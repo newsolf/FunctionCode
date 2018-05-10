@@ -15,6 +15,6 @@ import com.newolf.functioncode.app.base.BaseFragment
 class OtherFragment : BaseFragment() {
     override fun onStart() {
         super.onStart()
-        BarUtils.setStatusBarLightMode(activity, true)
+        BarUtils.setStatusBarLightMode(activity!!, true)
     }
 }

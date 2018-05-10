@@ -19,14 +19,11 @@ class HomeFragment : BaseFragment() {
     }
 
 
-
-
-
-
-
     override fun onStart() {
         super.onStart()
-        BarUtils.setStatusBarLightMode(activity, false)
+        BarUtils.setStatusBarLightMode(activity!!, false)
+
+
     }
 
 }

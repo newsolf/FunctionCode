@@ -24,7 +24,7 @@ object Navigate {
 
     fun startInnerH5(content: Context?, url: String) {
         LogUtils.e(url)
-        content?.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+        content?.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)).setFlags(FLAG_ACTIVITY_CLEAR_TASK))
     }
 
     fun startMainActivity(content: Context) {
