@@ -93,4 +93,5 @@ dependencies {
     implementation 'com.r0adkll:slidableactivity:2.0.5'
     implementation project(':library:CompatInset-kotlin')
     implementation project(':library:RereshLayout-java')
+//    implementation 'com.github.NeWolf:RefreshLayout:1.0.0'
 }
