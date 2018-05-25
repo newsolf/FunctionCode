@@ -75,7 +75,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$configs.kotlin_version"
+    implementation deps.kotlin
     implementation deps.appcompatV7
     implementation deps.design
     implementation deps.constraintLayout
@@ -92,6 +92,8 @@ dependencies {
     implementation 'cn.jiguang.sdk:jcore:1.1.9'
     implementation 'com.r0adkll:slidableactivity:2.0.5'
     implementation project(':library:CompatInset-kotlin')
-    implementation project(':library:RereshLayout-java')
-//    implementation 'com.github.NeWolf:RefreshLayout:1.0.0'
+//    implementation project(':library:RereshLayout-java')
+
+    implementation  'com.github.NeWolf:RefreshLayout:2.0.0'
+
 }

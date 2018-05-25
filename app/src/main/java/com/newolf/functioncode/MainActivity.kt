@@ -74,21 +74,23 @@ class MainActivity : BaseDrawerActivity() {
 
     private fun request() = PermissionUtils.permission(PermissionConstants.STORAGE)
             .rationale { shouldRequest -> DialogHelper.showRationaleDialog(shouldRequest) }
-            .rationale { shouldRequest -> ToastUtils.showLong(shouldRequest.toString()) }
+//            .rationale { shouldRequest -> ToastUtils.showLong(shouldRequest.toString()) }
             .callback(object : PermissionUtils.FullCallback {
                 override fun onGranted(permissionsGranted: List<String>) {
                     LogUtils.d(permissionsGranted)
+                    ToastUtils.showShort("获得权限,可以开始操作了")
                 }
 
                 override fun onDenied(permissionsDeniedForever: List<String>,
                                       permissionsDenied: List<String>) {
-                    if (!permissionsDeniedForever.isEmpty()) {
+                    if (permissionsDeniedForever.isEmpty()) {
                         DialogHelper.showOpenAppSettingDialog()
                         ToastUtils.showShort("没有获得权限")
                     }
                     LogUtils.d(permissionsDeniedForever, permissionsDenied)
                 }
             })
+
             .request()
 
     override fun onBackPressed() {

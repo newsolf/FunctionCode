@@ -22,7 +22,7 @@ object DialogHelper {
                 .setTitle(android.R.string.dialog_alert_title)
                 .setMessage(R.string.permission_rationale_message)
                 .setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener { dialog, which -> shouldRequest.again(true) })
-                .setNegativeButton(android.R.string.cancel, DialogInterface.OnClickListener { dialog, which -> shouldRequest.again(false) })
+                .setNegativeButton(android.R.string.cancel, DialogInterface.OnClickListener { dialog, which -> shouldRequest.again(false) } )
                 .setCancelable(false)
                 .create()
                 .show()

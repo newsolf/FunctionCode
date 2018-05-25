@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.31'
+    ext.kotlin_version = '1.2.41'
 //    ext.kotlin_version = '1.0.0'
     ext {
         configs = [kotlin_version   : kotlin_version,
@@ -21,6 +21,8 @@ buildscript {
 
         def supportLibraryVersion = '27.1.0'
         def constraintLayoutVersion = '1.0.2'
+
+
         deps = [supportCompat   : "com.android.support:support-compat:$supportLibraryVersion",
                 supportCoreUi   : "com.android.support:support-core-ui:$supportLibraryVersion",
                 supportFragment : "com.android.support:support-fragment:$supportLibraryVersion",
@@ -30,8 +32,14 @@ buildscript {
                 supportV4       : "com.android.support:support-v4:$supportLibraryVersion",
                 vectorDrawable  : "com.android.support:support-vector-drawable:$supportLibraryVersion",
                 recyclerviewV7  : "com.android.support:recyclerview-v7:$supportLibraryVersion",
-                constraintLayout: "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
+                constraintLayout: "com.android.support.constraint:constraint-layout:$constraintLayoutVersion",
+                kotlin          : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+
         ]
+
+
+
 
     }
     repositories {
@@ -40,7 +48,7 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0-alpha04'
+        classpath 'com.android.tools.build:gradle:3.2.0-alpha15'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$configs.kotlin_version"
         classpath "com.tencent.bugly:tinker-support:1.1.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -57,6 +65,7 @@ allprojects {
         maven { url "https://jitpack.io" }
     }
 }
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir

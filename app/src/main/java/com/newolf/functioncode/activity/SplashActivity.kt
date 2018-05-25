@@ -7,9 +7,11 @@ import com.newolf.functioncode.app.Navigate
 import com.newolf.functioncode.app.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 
+
 class SplashActivity : BaseActivity() {
     val millisInFuture: Long = 6000
     val countDownInterval: Long = 1000
+    lateinit var timer: CountDownTimer
     override fun bindLayout(): Int {
         return R.layout.activity_splash
     }
@@ -20,9 +22,9 @@ class SplashActivity : BaseActivity() {
 
     override fun loadData() {
 
-        object : CountDownTimer(millisInFuture, countDownInterval) {
+         timer = object : CountDownTimer(millisInFuture, countDownInterval) {
             override fun onFinish() {
-//                nextToHome()
+                nextToHome()
             }
 
             override fun onTick(millisUntilFinished: Long) {
@@ -34,6 +36,8 @@ class SplashActivity : BaseActivity() {
             }
 
         }.start()
+
+
     }
 
     override fun initListener() {
@@ -45,6 +49,11 @@ class SplashActivity : BaseActivity() {
     private fun nextToHome() {
         Navigate.startMainActivity(mContext)
         finish()
+    }
+
+    override fun finish() {
+        super.finish()
+        timer.cancel()
     }
 
 

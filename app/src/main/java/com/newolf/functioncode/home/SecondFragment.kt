@@ -33,7 +33,7 @@ class SecondFragment : BaseFragment() {
     override fun onStart() {
         super.onStart()
         BarUtils.setStatusBarLightMode(activity!!, true)
-        refreshLayout.setBaseHeaderAdapter()
+        refreshLayout.setBaseHeaderAdapter(javaClass.simpleName)
         refreshLayout.setOnHeaderRefreshListener { refreshLayout -> refreshLayout.postDelayed({ refreshLayout.onHeaderRefreshComplete() }, 500) }
         refreshLayout.setBaseFooterAdapter()
     }
