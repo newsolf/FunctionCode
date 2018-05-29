@@ -2,6 +2,7 @@ package com.newolf.functioncode.app.base
 
 import android.support.annotation.LayoutRes
 import android.view.MenuItem
+import com.blankj.utilcode.util.BarUtils
 import com.newolf.functioncode.R
 import com.r0adkll.slidr.Slidr
 import kotlinx.android.synthetic.main.activity_back.*
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_back.*
  * ================================================
  */
 abstract class BaseBackActivity : BaseActivity() {
+
     override fun setBaseView(@LayoutRes layoutId: Int)  {
         Slidr.attach(this)
         setContentView(R.layout.activity_back)
@@ -32,5 +34,10 @@ abstract class BaseBackActivity : BaseActivity() {
             finish()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        BarUtils.setStatusBarLightMode(this, true)
     }
 }

@@ -22,19 +22,18 @@ class SecondFragment : BaseFragment() {
     override fun initView() {
 
 
-
     }
 
     override fun initListener() {
+        refreshLayout.setBaseHeaderAdapter(javaClass.simpleName)
+        refreshLayout.setOnHeaderRefreshListener { refreshLayout -> refreshLayout.postDelayed({ refreshLayout.onHeaderRefreshComplete() }, 500) }
+        refreshLayout.setBaseFooterAdapter()
 
     }
 
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         BarUtils.setStatusBarLightMode(activity!!, true)
-        refreshLayout.setBaseHeaderAdapter(javaClass.simpleName)
-        refreshLayout.setOnHeaderRefreshListener { refreshLayout -> refreshLayout.postDelayed({ refreshLayout.onHeaderRefreshComplete() }, 500) }
-        refreshLayout.setBaseFooterAdapter()
     }
 }

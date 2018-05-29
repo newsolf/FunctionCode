@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.blankj.utilcode.util.LogUtils
 import com.newolf.functioncode.R
 import kotlinx.android.synthetic.main.fragment_base.*
 
@@ -54,5 +55,10 @@ abstract class BaseFragment : Fragment(), IBaseView {
     }
 
     override fun initListener() {
+    }
+
+    override fun onResume() {
+        super.onResume()
+        LogUtils.e("current = "+this.javaClass.simpleName)
     }
 }

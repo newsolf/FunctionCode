@@ -25,16 +25,19 @@ class MainActivity : BaseDrawerActivity() {
             R.id.navigation_home -> {
                 LogUtils.e("navigation_home")
                 switchHome()
+
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
                 LogUtils.e("navigation_dashboard")
-                showCurrentFragment(1)
+//                showCurrentFragment(1)
+                supportFragmentManager.beginTransaction().replace(R.id.flContent, SecondFragment()).commit()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
                 LogUtils.e("navigation_notifications")
-                showCurrentFragment(2)
+//                showCurrentFragment(2)
+                supportFragmentManager.beginTransaction().replace(R.id.flContent, OtherFragment()).commit()
                 return@OnNavigationItemSelectedListener true
             }
 
@@ -50,17 +53,17 @@ class MainActivity : BaseDrawerActivity() {
     override fun initView() {
         request()
 
-        mFragments.add(HomeFragment())
-        mFragments.add(SecondFragment())
-        mFragments.add(OtherFragment())
-
-        FragmentUtils.add(supportFragmentManager, mFragments, R.id.flContent, curIndex)
+//        mFragments.add(HomeFragment())
+//        mFragments.add(SecondFragment())
+//        mFragments.add(OtherFragment())
+//
+//        FragmentUtils.add(supportFragmentManager, mFragments, R.id.flContent, curIndex)
     }
 
 
     override fun initListener() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-//        switchHome()
+        switchHome()
     }
 
     private fun switchHome() {
@@ -68,7 +71,8 @@ class MainActivity : BaseDrawerActivity() {
 
 //        fragmentManager.beginTransaction().replace(R.id.flContent, HomeFragment()).commit()
 //        FragmentUtils.add(supportFragmentManager, HomeFragment(),R.id.flContent)
-        showCurrentFragment(0)
+        supportFragmentManager.beginTransaction().replace(R.id.flContent,HomeFragment()).commit()
+//        showCurrentFragment(0)
     }
 
 

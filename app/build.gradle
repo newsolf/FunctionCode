@@ -94,6 +94,6 @@ dependencies {
     implementation project(':library:CompatInset-kotlin')
 //    implementation project(':library:RereshLayout-java')
 
-    implementation  'com.github.NeWolf:RefreshLayout:2.0.0'
+    implementation 'com.github.NeWolf:RefreshLayout:2.0.0'
 
 }

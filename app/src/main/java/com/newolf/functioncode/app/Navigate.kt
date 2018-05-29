@@ -6,6 +6,7 @@ import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.net.Uri
 import com.blankj.utilcode.util.LogUtils
 import com.newolf.functioncode.MainActivity
+import com.newolf.functioncode.fingerprint.FingerprintSettingActivity
 
 
 /**
@@ -18,8 +19,8 @@ import com.newolf.functioncode.MainActivity
  * ================================================
  */
 object Navigate {
-    private fun startActivity(context: Context, clz: Class<*>) {
-        context.startActivity(Intent(context, clz))
+    private fun startActivity(context: Context?, clazz: Class<*>) {
+        context?.startActivity(Intent(context, clazz))
     }
 
     fun startInnerH5(content: Context?, url: String) {
@@ -29,5 +30,9 @@ object Navigate {
 
     fun startMainActivity(content: Context) {
         content.startActivity(Intent(content, MainActivity::class.java).setFlags(FLAG_ACTIVITY_CLEAR_TASK))
+    }
+
+    fun startFingerprintSettingActivity(context: Context?) {
+        startActivity(context, FingerprintSettingActivity::class.java)
     }
 }

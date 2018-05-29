@@ -9,6 +9,8 @@
         <!--slider-->
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:textAllCaps">false</item>
+
 
     </style>
 
@@ -31,6 +33,27 @@
         <item name="colorPrimary">@color/FFFFFF</item>
         <item name="colorPrimaryDark">@color/FFFFFF</item>
         <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+
+    <style name="WolfButtonStyBase" parent="Base.Widget.AppCompat.Button">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/textSize_20</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:minHeight">60dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+    </style>
+
+    <style name="WolfButtonStyRed" parent="WolfButtonStyBase">
+        <item name="android:background">@drawable/wolf_button_selector_red</item>
+        <item name="android:textColor">@drawable/wolf_button_color_white</item>
+    </style>
+
+    <style name="WolfButtonStyWhite" parent="WolfButtonStyBase">
+        <item name="android:background">@drawable/wolf_button_selector_white</item>
+        <item name="android:textColor">@drawable/wolf_button_color_red</item>
     </style>
 
 </resources>

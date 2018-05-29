@@ -13,4 +13,8 @@
     <string name="app_introduce">项目介绍</string>
     <string name="activity_splash">Splash</string>
     <string name="jump">Jump %1$ds</string>
+    <string name="fingerprint">Fingerprint</string>
+    <string name="fingerprint_hint">Touch sensor</string>
+    <string name="fingerprint_description">Confirm fingerprint to continue</string>
+    <string name="sign_in">sign_in</string>
 </resources>
