@@ -17,4 +17,5 @@
     <string name="fingerprint_hint">触摸指纹传感器</string>
     <string name="fingerprint_description">确认指纹完成认证</string>
     <string name="sign_in">输入指纹</string>
+    <string name="zxingScan">zxing 扫一扫</string>
 </resources>

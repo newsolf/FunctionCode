@@ -24,10 +24,13 @@ abstract class BaseBackActivity : BaseActivity() {
         activityContainer.addView(layoutInflater.inflate(layoutId,null))
         setSupportActionBar(toolBar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle(getTitleResId())
 
         //BarUtils.setStatusBarColor(this, ContextCompat.getColor(mContext, R.color.colorPrimary), 0)
 //        BarUtils.addMarginTopEqualStatusBarHeight(rootLayout)
     }
+
+    abstract fun getTitleResId(): Int
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {

@@ -21,6 +21,10 @@ import javax.crypto.NoSuchPaddingException
 import javax.crypto.SecretKey
 
 class FingerprintSettingActivity : BaseBackActivity() {
+    override fun getTitleResId(): Int {
+        return R.string.fingerprint
+    }
+
     private lateinit var keyStore: KeyStore
     private lateinit var keyGenerator: KeyGenerator
     private lateinit var cancellationSignal: CancellationSignal

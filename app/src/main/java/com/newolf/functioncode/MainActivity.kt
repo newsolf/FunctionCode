@@ -4,10 +4,7 @@ import android.support.design.widget.BottomNavigationView.OnNavigationItemSelect
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import com.blankj.utilcode.constant.PermissionConstants
-import com.blankj.utilcode.util.FragmentUtils
-import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.PermissionUtils
-import com.blankj.utilcode.util.ToastUtils
+import com.blankj.utilcode.util.*
 import com.newolf.functioncode.app.base.BaseDrawerActivity
 import com.newolf.functioncode.app.utils.helper.DialogHelper
 import com.newolf.functioncode.home.HomeFragment
@@ -30,14 +27,15 @@ class MainActivity : BaseDrawerActivity() {
             }
             R.id.navigation_dashboard -> {
                 LogUtils.e("navigation_dashboard")
-//                showCurrentFragment(1)
-                supportFragmentManager.beginTransaction().replace(R.id.flContent, SecondFragment()).commit()
+                showCurrentFragment(1)
+                (mFragments.get(1) as SecondFragment).onResume()
+//                supportFragmentManager.beginTransaction().replace(R.id.flContent, SecondFragment()).commit()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
                 LogUtils.e("navigation_notifications")
-//                showCurrentFragment(2)
-                supportFragmentManager.beginTransaction().replace(R.id.flContent, OtherFragment()).commit()
+                showCurrentFragment(2)
+//                supportFragmentManager.beginTransaction().replace(R.id.flContent, OtherFragment()).commit()
                 return@OnNavigationItemSelectedListener true
             }
 
@@ -50,20 +48,21 @@ class MainActivity : BaseDrawerActivity() {
         return R.layout.activity_main
     }
 
+
     override fun initView() {
         request()
 
-//        mFragments.add(HomeFragment())
-//        mFragments.add(SecondFragment())
-//        mFragments.add(OtherFragment())
+        mFragments.add(HomeFragment())
+        mFragments.add(SecondFragment())
+        mFragments.add(OtherFragment())
 //
-//        FragmentUtils.add(supportFragmentManager, mFragments, R.id.flContent, curIndex)
+        FragmentUtils.add(supportFragmentManager, mFragments, R.id.flContent, curIndex)
     }
 
 
     override fun initListener() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        switchHome()
+//        switchHome()
     }
 
     private fun switchHome() {
@@ -71,8 +70,9 @@ class MainActivity : BaseDrawerActivity() {
 
 //        fragmentManager.beginTransaction().replace(R.id.flContent, HomeFragment()).commit()
 //        FragmentUtils.add(supportFragmentManager, HomeFragment(),R.id.flContent)
-        supportFragmentManager.beginTransaction().replace(R.id.flContent,HomeFragment()).commit()
-//        showCurrentFragment(0)
+//        supportFragmentManager.beginTransaction().replace(R.id.flContent,HomeFragment()).commit()
+        showCurrentFragment(0)
+
     }
 
 
@@ -111,6 +111,17 @@ class MainActivity : BaseDrawerActivity() {
     fun showCurrentFragment(index: Int) {
         curIndex = index
         FragmentUtils.showHide(index, mFragments)
+        if (curIndex == 0) {
+            BarUtils.setStatusBarLightMode(this, false)
+        }else{
+            BarUtils.setStatusBarLightMode(this, true)
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showCurrentFragment(curIndex)
     }
 
 

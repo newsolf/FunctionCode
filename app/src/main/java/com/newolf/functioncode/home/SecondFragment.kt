@@ -1,6 +1,5 @@
 package com.newolf.functioncode.home
 
-import com.blankj.utilcode.util.BarUtils
 import com.newolf.functioncode.R
 import com.newolf.functioncode.app.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_second.*
@@ -25,15 +24,16 @@ class SecondFragment : BaseFragment() {
     }
 
     override fun initListener() {
-        refreshLayout.setBaseHeaderAdapter(javaClass.simpleName)
-        refreshLayout.setOnHeaderRefreshListener { refreshLayout -> refreshLayout.postDelayed({ refreshLayout.onHeaderRefreshComplete() }, 500) }
-        refreshLayout.setBaseFooterAdapter()
+
 
     }
-
 
     override fun onResume() {
         super.onResume()
-        BarUtils.setStatusBarLightMode(activity!!, true)
+        refreshLayout.setBaseHeaderAdapter(javaClass.simpleName)
+        refreshLayout.setOnHeaderRefreshListener { refreshLayout -> refreshLayout.postDelayed({ refreshLayout.onHeaderRefreshComplete() }, 500) }
+        refreshLayout.setBaseFooterAdapter()
     }
+
+
 }

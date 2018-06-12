@@ -6,6 +6,7 @@ import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.net.Uri
 import com.blankj.utilcode.util.LogUtils
 import com.newolf.functioncode.MainActivity
+import com.newolf.functioncode.activity.ZxingScanActivity
 import com.newolf.functioncode.fingerprint.FingerprintSettingActivity
 
 
@@ -34,5 +35,9 @@ object Navigate {
 
     fun startFingerprintSettingActivity(context: Context?) {
         startActivity(context, FingerprintSettingActivity::class.java)
+    }
+
+    fun startZxingScanActivity(context: Context?) {
+        startActivity(context, ZxingScanActivity::class.java)
     }
 }

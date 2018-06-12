@@ -14,10 +14,10 @@
         android:id="@+id/activityContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="true"
+        android:clipToPadding="@bool/fits_system_windows"
         android:fitsSystemWindows="@bool/fits_system_windows">
 
-        <include layout="@layout/view_fake_status_bar"/>
+
 
     </com.newolf.compatinset.InsetFramelayout>
 

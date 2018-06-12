@@ -14,5 +14,12 @@
         style="@style/WolfButtonStyWhite"
         />
 
+    <Button
+        android:id="@+id/btnScan"
+        style="@style/WolfButtonStyWhite"
+        android:layout_marginTop="25dp"
+        android:text="@string/zxingScan"
+        />
+
 
 </LinearLayout>

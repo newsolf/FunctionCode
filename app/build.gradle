@@ -95,5 +95,6 @@ dependencies {
 //    implementation project(':library:RereshLayout-java')
 
     implementation 'com.github.NeWolf:RefreshLayout:2.0.0'
-
+    implementation 'cn.bingoogolapple:bga-qrcode-zxing:1.2.1'
+//    implementation 'com.contrarywind:Android-PickerView:4.1.4'
 }
