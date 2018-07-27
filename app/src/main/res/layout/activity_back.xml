@@ -23,7 +23,8 @@
             app:layout_scrollFlags="scroll|enterAlways"/>
     </android.support.design.widget.AppBarLayout>
 
-    <com.newolf.compatinset.InsetFramelayout
+    <FrameLayout
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
 
         android:id="@+id/activityContainer"
         android:layout_width="match_parent"

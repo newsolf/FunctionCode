@@ -22,4 +22,19 @@
         />
 
 
+    <Button
+        android:id="@+id/btnFingerprintHelper"
+        android:layout_marginTop="25dp"
+        android:text="FingerprintHelper"
+        style="@style/WolfButtonStyWhite"
+        />
+
+    <Button
+        android:id="@+id/btnQuittingTime"
+        style="@style/WolfButtonStyWhite"
+        android:layout_marginTop="25dp"
+        android:text="@string/quittingtime"
+        />
+
+
 </LinearLayout>

@@ -18,4 +18,6 @@
     <string name="fingerprint_description">Confirm fingerprint to continue</string>
     <string name="sign_in">sign_in</string>
     <string name="zxingScan">zxingScan</string>
+    <string name="verify">To verify</string>
+    <string name="quittingtime">QuittingTime</string>
 </resources>

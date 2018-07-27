@@ -6,7 +6,9 @@ import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.net.Uri
 import com.blankj.utilcode.util.LogUtils
 import com.newolf.functioncode.MainActivity
+import com.newolf.functioncode.activity.QuittingTimeActivity
 import com.newolf.functioncode.activity.ZxingScanActivity
+import com.newolf.functioncode.fingerprint.FingerprintHelperActivity
 import com.newolf.functioncode.fingerprint.FingerprintSettingActivity
 
 
@@ -39,5 +41,13 @@ object Navigate {
 
     fun startZxingScanActivity(context: Context?) {
         startActivity(context, ZxingScanActivity::class.java)
+    }
+
+    fun startFingerprintHelperActivity(context: Context?) {
+        startActivity(context, FingerprintHelperActivity::class.java)
+    }
+
+    fun startQuittingTimeActivity(context: Context?) {
+        startActivity(context, QuittingTimeActivity::class.java)
     }
 }

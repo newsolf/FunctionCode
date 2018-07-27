@@ -1,5 +1,11 @@
 package com.newolf.functioncode.activity
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.provider.MediaStore
+import android.text.TextUtils
 import cn.bingoogolapple.qrcode.core.QRCodeView
 import cn.bingoogolapple.qrcode.zxing.QRCodeEncoder
 import com.blankj.utilcode.constant.PermissionConstants
@@ -15,19 +21,21 @@ class ZxingScanActivity : BaseBackActivity(), QRCodeView.Delegate {
     override fun onScanQRCodeSuccess(result: String?) {
 
         ToastUtils.showShort("onScanQRCodeSuccess $result")
-            enCode(result)
+        enCode(result)
     }
 
-     fun enCode(des: String?) {
-        Thread(){kotlin.run {
-         val btimap =    QRCodeEncoder.syncEncodeQRCode(des,200)
-            runOnUiThread({
-                if (!isFinishing){
-                    ivShow.setImageBitmap(btimap)
-                    zxingView.startSpotDelay(0)
-                }
-            })
-        }}.start()
+    fun enCode(des: String?) {
+        Thread() {
+            kotlin.run {
+                val btimap = QRCodeEncoder.syncEncodeQRCode(des, 400)
+                runOnUiThread({
+                    if (!isFinishing) {
+                        ivShow.setImageBitmap(btimap)
+                        zxingView.startSpotDelay(0)
+                    }
+                })
+            }
+        }.start()
 
     }
 
@@ -72,7 +80,17 @@ class ZxingScanActivity : BaseBackActivity(), QRCodeView.Delegate {
             .request()
 
     override fun initListener() {
+        btnOpen.setOnClickListener({
+            openSystem()
+        })
+    }
 
+    private val REQUEST_CODE_CHOOSE = 0x11
+
+    private fun openSystem() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
+        startActivityForResult(intent, REQUEST_CODE_CHOOSE)
     }
 
 
@@ -86,4 +104,34 @@ class ZxingScanActivity : BaseBackActivity(), QRCodeView.Delegate {
         zxingView.onDestroy()
     }
 
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_CODE_CHOOSE) {
+                val uri = data?.data
+                LogUtils.e("uri = $uri")
+                if (!TextUtils.isEmpty(uri?.toString())) {
+                    createBitmap(uri)
+                }else{
+                    LogUtils.e("uri = null")
+                }
+            }
+        }
+    }
+
+    private fun createBitmap(uri: Uri?) {
+
+
+
+        val projection = arrayOf(MediaStore.MediaColumns.DATA)
+        val cursor = managedQuery(uri, projection, null, null, null)
+        if (cursor != null) {
+            val column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
+            cursor.moveToFirst()
+            val filePath =  cursor.getString(column_index)
+            val  bitmap = BitmapFactory.decodeFile(filePath)
+            ivShow.setImageBitmap(bitmap)
+        }
+    }
 }

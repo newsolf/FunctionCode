@@ -23,6 +23,8 @@ class OtherFragment : BaseFragment() {
     override fun initListener() {
         btnFingerprint.setOnClickListener({ Navigate.startFingerprintSettingActivity(mContext) })
         btnScan.setOnClickListener({ Navigate.startZxingScanActivity(mContext) })
+        btnFingerprintHelper.setOnClickListener({ Navigate.startFingerprintHelperActivity(mContext) })
+        btnQuittingTime.setOnClickListener({ Navigate.startQuittingTimeActivity(mContext) })
     }
 
 
