@@ -4,7 +4,6 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 
 
-
 /**
  * ================================================
  * @author : NeWolf
@@ -15,13 +14,10 @@ import com.google.gson.GsonBuilder
  * ================================================
  */
 object GsonHelper {
-    private  lateinit  var sGson: Gson
+    private val sGson: Gson = GsonBuilder()
+            .create()
 
     fun getDefault(): Gson {
-        if (sGson == null) {
-            sGson = GsonBuilder()
-                    .create()
-        }
         return sGson
     }
 

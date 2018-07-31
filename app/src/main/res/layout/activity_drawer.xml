@@ -10,7 +10,7 @@
     android:overScrollMode="never">
 
 
-    <com.newolf.compatinset.InsetFramelayout
+    <com.newolf.compatinset.InsetFrameLayout
         android:id="@+id/activityContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,7 +19,7 @@
 
 
 
-    </com.newolf.compatinset.InsetFramelayout>
+    </com.newolf.compatinset.InsetFrameLayout>
 
 
     <android.support.design.widget.NavigationView

@@ -68,4 +68,11 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+    <style name="WolfButtonStyCircle" parent="WolfButtonStyBase">
+        <item name="android:background">@drawable/wolf_button_selector_circle</item>
+        <item name="android:textColor">@drawable/wolf_button_color_red</item>
+    </style>
+
+
+
 </resources>

@@ -17,7 +17,7 @@ import android.widget.FrameLayout
  * 历史:<br/>
  * ================================================
  */
-class InsetFramelayout @JvmOverloads constructor(
+class InsetFrameLayout @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0

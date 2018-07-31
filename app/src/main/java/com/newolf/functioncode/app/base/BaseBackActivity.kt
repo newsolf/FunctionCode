@@ -26,7 +26,7 @@ abstract class BaseBackActivity : BaseActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setTitle(getTitleResId())
 
-        //BarUtils.setStatusBarColor(this, ContextCompat.getColor(mContext, R.color.colorPrimary), 0)
+//        BarUtils.setStatusBarColor(this, ContextCompat.getColor(mContext, R.color.colorPrimary), 0)
 //        BarUtils.addMarginTopEqualStatusBarHeight(rootLayout)
     }
 
