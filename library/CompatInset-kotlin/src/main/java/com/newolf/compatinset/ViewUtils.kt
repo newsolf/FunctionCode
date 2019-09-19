@@ -11,6 +11,6 @@ package com.newolf.compatinset
  */
 object ViewUtils{
     fun objectEquals(a: Any?, b: Any?): Boolean {
-        return a === b || a != null && a == b
+        return a == b || a != null && a == b
     }
 }
